@@ -1,0 +1,37 @@
+---
+title: "Lab 3"
+output: html_document
+---
+
+```{r, loaddata}
+songs<-read.csv("http://educ.jmu.edu/~wardex/datasets/spotifytop1000march2019.csv")
+head(songs)
+```
+
+### Loudness and Popularity
+## Scatterplot
+```{r, scatterplot}
+library(ggplot2)
+ggplot(songs, aes(x=loudness, y=popularity))+geom_jitter()+
+  geom_smooth(method="lm")
+```
+
+## Summary
+```{r, sumstats}
+summary(lm(loudness~popularity, songs))
+```
+## DOFS
+The slope is -9.50546 with one outlier, Going Bad (feat. Drake). It is linear with a slightly positive relationship. 
+
+## Correlation Coefficient and Coefficient of Determination
+```{r, correlation}
+cor(songs$loudness, songs$popularity)
+cor(songs$loudness, songs$popularity)^2
+```
+## Regression
+```{r, regression}
+lm(popularity~loudness, songs)
+model1<-lm(popularity~loudness, songs)
+summary(model1)
+```
+The assumptions for hypothesis testing are met. The data is linear, independent, and normally distributed. However, since the correlation is very weak (r=.07), loudness is not a good predictor of popularity. 

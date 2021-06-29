@@ -1,0 +1,40 @@
+---
+title: "celebrity death"
+output: html_document
+---
+
+
+```{r, loaddata}
+celebdeath<-read.csv('/Users/briannarinaldi/Desktop/College/JMU/DataAnalysis/celebrity_deaths_4.csv')
+head(celebdeath)
+```
+
+
+```{r, histogram}
+library(ggplot2)
+ggplot(celebdeath) + geom_bar(aes(x = death_month, fill = death_month)) + 
+  xlab("Month") + ggtitle("Months that Celebrities Die") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
+```
+
+```{r, piechart}
+deathyear<-table(celebdeath$death_year)
+pie(x = deathyear, labels = names(deathyear),init.angle = 25,col = RColorBrewer::brewer.pal(12, "Set3"))
+```
+
+```{r, regression}
+ggplot(celebdeath, aes(x=birth_year, y=age))+geom_point()
+```
+
+###Age of Death
+```{r, summaryage}
+summary(celebdeath$age)
+```
+###Causes of death
+```{r, summarydeath}
+summary(celebdeath$cause_of_death)
+```
+
+```{r, boxplot}
+boxplot(celebdeath$age, ylab="Age")
+```
